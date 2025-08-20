@@ -1,5 +1,21 @@
 .register {
-  background-color: var(--color-grey-10);
-  flex-grow: 1;
-  vertical-align: middle;
+  $bgColor: var(--color-grey-30);
+
+  max-width: 502px;
+  padding: 40px;
+  border-radius: var(--border-radius-m);
+  border: 1px solid transparent;
+  background:
+    linear-gradient($bgColor, $bgColor) padding-box,
+    linear-gradient(
+        120deg,
+        rgba(229, 231, 235, 0.5) 0.05%,
+        rgba(229, 231, 235, 0) 25.05%
+    ) border-box;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0;
 }

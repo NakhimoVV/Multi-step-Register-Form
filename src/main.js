@@ -1,10 +1,8 @@
-import '@/styles'
-import Button from './components/Button'
+import '@/styles/index.scss'
+import Register from "@/components/Register/index.js";
 
 document.querySelector('#app').innerHTML = `
     <section>
-        ${Button()}
-        <img src="/vite.svg" />
-        <p>Hello</p>
+        ${Register()}
     </section>
 `

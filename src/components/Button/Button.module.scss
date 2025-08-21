@@ -1,6 +1,12 @@
-.root {
-  background-color: lightblue;
+.button {
+  border: 0;
+  padding-block: 12px;
+  padding-inline: 36px;
+  background: var(--button-gradient);
+  color: var(--color-light);
+  border-radius: var(--border-radius-l);
 }
 .label {
-  color: #845EEE;
+  font-weight: 600;
+  font-size: 12px;
 }

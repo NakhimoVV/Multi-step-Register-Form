@@ -1,7 +1,13 @@
 .register {
   $bgColor: var(--color-grey-30);
 
+//  position: relative;
+  z-index: var(--layout-block);
+
+  display: flex;
+  flex-direction: column;
   max-width: 502px;
+  margin-inline: auto;
   padding: 40px;
   border-radius: var(--border-radius-m);
   border: 1px solid transparent;
@@ -18,4 +24,17 @@
   font-weight: 500;
   font-size: 20px;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  margin-block: 40px 36px;
+}
+
+.footer{
+  align-self: center;
 }

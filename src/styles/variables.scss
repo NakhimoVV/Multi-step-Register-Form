@@ -6,15 +6,19 @@
   --color-silver: #A1A1A9;
   --color-light: #E5E7EB;
   --color-accent: #845EEE;
-  --color-accent-light: #845EEE4D;
+  --color-accent-light: #652cd1;
   --color-pin: #5425AF;
 
   --border: 1px solid var(--color-grey-10);
+  --button-gradient: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
 
   --border-radius-l: 38px;
   --border-radius-m: 12px;
 
   --font-family-base: 'Inter', sans-serif;
+
+  --layout-block: 100;
+  --layout-blure-circle: 10;
 
   --transition-duration: 0.2s;
 }

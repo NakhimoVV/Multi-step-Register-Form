@@ -5,10 +5,12 @@ import Button from "@/components/Button/index.js";
 export default () => `
     <div class="${styles.register}">
         <h2 class="${styles.title}">Register</h2>
-        <form action="">
+        <form class="${styles.form}" action="">
           ${Field({label:'Name', placeholder:'Enter your name'})}
           ${Field({label:'Email', placeholder:'Example@gmail.com', type:'email'})}
         </form>
-        ${Button()}
+        <div class="${styles.footer}">
+          ${Button()}
+        </div>
     </div>
 `

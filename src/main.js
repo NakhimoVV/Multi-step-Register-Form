@@ -2,7 +2,7 @@ import '@/styles/index.scss'
 import Register from "@/components/Register/index.js";
 
 document.querySelector('#app').innerHTML = `
-    <section>
+    <section class="wrapper">
         ${Register()}
     </section>
 `

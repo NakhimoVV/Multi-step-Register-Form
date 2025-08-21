@@ -1,3 +1,7 @@
+#app {
+  width: 100%;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -6,4 +10,31 @@ body {
   font-family: var(--font-family-base);
   color: var(--color-light);
   background-color: var(--color-black);
+  font-weight: 400;
+}
+
+button,
+label,
+input,
+select {
+  transition-duration: var(--transition-duration);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-accent);
+  transition-duration: 0s !important;
+}
+
+.wrapper {
+  position: relative;
+
+
+  &::before {
+    content: url('blur-radial.png');
+    position: absolute;
+    top: 0;
+    left: 30%;
+    z-index: var(--layout-blure-circle);
+  }
 }

@@ -1,3 +1,4 @@
+import styles from "./Field.module.scss";
 import getIdFromLabel from "@/modules/getIdFromLabel.js";
 
 export default (props) => {
@@ -9,9 +10,16 @@ export default (props) => {
   } = props
 
   return `
-    <div>
+    <div class="${styles.field}">
       <label for="${id}">${label}</label>
-      <input type="${type}" id="${id}" placeholder="${placeholder}" autocomplete="true" }/>
+      <div>
+        <input 
+          type="${type}"
+          id="${id}"
+          placeholder="${placeholder}"
+          autocomplete="true"
+        />      
+      </div>
     </div>
   `
 }

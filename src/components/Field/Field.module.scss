@@ -1,0 +1,29 @@
+@use '@/styles/media.scss' as *;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  font-size: 12px;
+
+  & input {
+    appearance: none;
+    width: 100%;
+    height: 47px;
+    padding: 16px;
+    color: var(--color-light);
+    background-color: inherit;
+    border: var(--border);
+    border-radius: var(--border-radius-m);
+
+    @include hover {
+      border-width: 2px;
+      border-color: var(--color-light);
+    }
+
+    &::placeholder {
+      font-weight: 500;
+      color: var(--color-light);
+    }
+  }
+}

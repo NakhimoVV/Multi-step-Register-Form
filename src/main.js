@@ -1,8 +1,8 @@
 import '@/styles/index.scss'
-import Register from "@/components/Register/index.js";
+import Step from "@/components/Step/index.js";
+import Status from "@/components/Status/index.js";
 
 document.querySelector('#app').innerHTML = `
-    <section class="wrapper">
-        ${Register()}
-    </section>
+  ${Step()}
+  ${Status()}
 `

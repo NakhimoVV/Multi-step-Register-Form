@@ -1,0 +1,31 @@
+.status {
+  display: flex;
+  align-items: center;
+  column-gap: 30px;
+  align-self: center;
+}
+
+.label {
+  font-weight: 200;
+}
+
+.pins {
+  display: flex;
+  column-gap: 11px;
+
+  &__item {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-grey-20);
+
+    padding: 0;
+    border: none;
+    cursor: pointer;
+
+    &.isActive {
+      background-color: var(--color-pin);
+      box-shadow: 0 0 0 5px var(--color-shadow-pin);
+    }
+  }
+}

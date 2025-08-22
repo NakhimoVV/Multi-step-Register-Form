@@ -4,8 +4,8 @@ import Button from "@/components/Button/index.js";
 
 export default () => `
     <div class="${styles.register}">
-        <h2 class="${styles.title}">Register</h2>
-        <form class="${styles.form}" action="">
+        <h1 class="${styles.title}">Register</h1>
+        <form class="${styles.form}" >
           ${Field({label:'Name', placeholder:'Enter your name'})}
           ${Field({label:'Email', placeholder:'Example@gmail.com', type:'email'})}
         </form>

@@ -1,12 +1,12 @@
 .register {
   $bgColor: var(--color-grey-30);
 
-//  position: relative;
+  position: relative;
   z-index: var(--layout-block);
 
   display: flex;
   flex-direction: column;
-  max-width: 502px;
+  max-width: var(--width-block);
   margin-inline: auto;
   padding: 40px;
   border-radius: var(--border-radius-m);
@@ -35,6 +35,6 @@
   margin-block: 40px 36px;
 }
 
-.footer{
+.footer {
   align-self: center;
 }

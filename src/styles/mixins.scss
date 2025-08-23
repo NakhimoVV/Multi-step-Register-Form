@@ -1,0 +1,24 @@
+@use 'media' as *;
+
+@mixin field-style {
+  width: 100%;
+  height: 47px;
+  padding: 16px;
+  color: var(--color-light);
+  background-color: inherit;
+  border: var(--border);
+  border-radius: var(--border-radius-m);
+
+  @include hover {
+    border-color: var(--color-light);
+  }
+
+  &:focus {
+    border-color: var(--color-light);
+    outline: none;
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+}

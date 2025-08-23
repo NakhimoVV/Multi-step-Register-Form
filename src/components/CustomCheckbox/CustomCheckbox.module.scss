@@ -1,0 +1,25 @@
+@use '@/styles/mixins.scss' as *;
+
+.field {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  transition-duration: var(--transition-duration);
+
+  @include field-style;
+
+  &:has(input:checked) {
+    font-weight: 700;
+    background-color: var(--color-pin);
+    border-color: var(--color-accent);
+  }
+
+  &:has(input:focus) {
+    border-color: var(--color-light);
+  }
+}
+
+.label {
+  font-size: 14px;
+  user-select: none;
+}

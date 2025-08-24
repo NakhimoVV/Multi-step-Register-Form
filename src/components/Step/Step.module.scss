@@ -1,3 +1,5 @@
+@use '@/styles/media' as *;
+
 .step {
   $bgColor: var(--color-grey-30);
 
@@ -16,14 +18,23 @@
         rgba(229, 231, 235, 0.5) 0.05%,
         rgba(229, 231, 235, 0) 25.05%
     ) border-box;
+
+  @include mobile {
+    padding: 24px;
+  }
 }
 
 .title {
   font-weight: 500;
   font-size: 20px;
-  margin-bottom: 40px;
+  padding: 0;
+  margin-bottom: 36px;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @include mobile-landscape {
+    margin-bottom: 16px;
+  }
 }
 
 .form {
@@ -33,18 +44,12 @@
   & fieldset {
     display: flex;
     flex-direction: column;
-    row-gap: 24px;
+    row-gap: 16px;
     margin-bottom: 36px;
 
-//    &:first-child {
-//      display: none;
-//    }
-//    &:nth-child(2) {
-//      display: none;
-//    }
-//    &:last-child {
-//      display: none;
-//    }
+    @include mobile-landscape {
+      margin-bottom: 16px;
+    }
   }
 }
 

@@ -3,6 +3,7 @@ import styles from './CustomCheckbox.module.scss';
 export default (props) => {
   const {
     label,
+    isChecked = false,
   } = props
 
   return (`
@@ -12,6 +13,7 @@ export default (props) => {
         type="checkbox"
         name="topics"
         value="${label}"
+        ${isChecked ? 'checked' : ''}
       />
       <span class="${styles.label}">
         ${label}

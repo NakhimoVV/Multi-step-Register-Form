@@ -10,7 +10,7 @@
 
   &:has(input:checked) {
     font-weight: 700;
-    background-color: var(--color-pin);
+    background-color: var(--color-step);
     border-color: var(--color-accent);
   }
 

@@ -1,4 +1,5 @@
 import steps from "@/modules/steps.js";
+import { isActive, isSuccess } from '@/components/Status/Status.module.scss'
 
 class App {
   selectors= {
@@ -11,6 +12,12 @@ class App {
     fieldEmailInput: '[data-js-app-field-email-input]',
     formButton: '[data-js-app-form-button]',
     numberStep: '[data-js-app-number-step]',
+    appStepper: '[data-js-app-stepper]',
+  }
+
+  stateClasses = {
+    isActive,
+    isSuccess
   }
 
   localStorageKey = 'app-form'
@@ -23,13 +30,16 @@ class App {
     this.dynamicContentElement = this.formFieldsetElement.querySelector(this.selectors.dynamicContent);
     this.formButtonElement = this.rootElement.querySelector(this.selectors.formButton);
     this.numberStepElement = this.rootElement.querySelector(this.selectors.numberStep);
+    this.appStepperElement = this.rootElement.querySelector(this.selectors.appStepper);
 
     this.state = {
       data: this.getDataFromLocalStorage(),
+      stepperArray: Array.from(this.appStepperElement.children),
       currentStep: 0,
     }
 
     this.render()
+
     this.bindEvents()
   }
 
@@ -63,6 +73,15 @@ class App {
   render() {
     const step = steps[this.state.currentStep]
     this.stepTitleElement.textContent = step.title
+
+    this.state.stepperArray.map((step, index, array) => {
+      if (index === this.state.currentStep) {
+        step.classList.add(this.stateClasses.isActive)
+      } else {
+        step.classList.remove(this.stateClasses.isActive)
+      }
+    })
+
     this.dynamicContentElement.innerHTML = step.render(this.state.data)
     this.numberStepElement.textContent = this.state.currentStep + 1
 
@@ -89,6 +108,7 @@ class App {
     if (isFirstStepData) {
       this.state.data = {...stepData}
       this.saveDataToLocalStorage()
+      this.state.stepperArray[this.state.currentStep].classList.add(this.stateClasses.isSuccess)
       this.state.currentStep++
       this.render()
     }
@@ -96,7 +116,18 @@ class App {
     if (Array.isArray(stepData) && stepData.length > 0) {
       this.state.data['topics'] = stepData;
       this.saveDataToLocalStorage()
+      this.state.stepperArray[this.state.currentStep].classList.add(this.stateClasses.isSuccess)
       this.state.currentStep++
+      this.render()
+    }
+  }
+
+  prevStep(target) {
+    if (this.state.currentStep > 0) {
+      this.state.stepperArray[this.state.currentStep].classList.remove(this.stateClasses.isActive)
+      this.state.stepperArray[this.state.currentStep - 1].classList.remove(this.stateClasses.isSuccess)
+      this.state.currentStep--
+      target.classList.add(this.stateClasses.isActive)
       this.render()
     }
   }
@@ -133,17 +164,29 @@ class App {
       }
     }
   }
+
+  onPrevStep = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+
+    const target = event.target;
+
+    this.prevStep(target)
+  }
+
   onConfirm = (event) => {
     event.preventDefault();
     this.deleteDataFromLocalStorage()
     this.state.data = {}
     alert("🎉 Success")
     this.state.currentStep = 0
+    this.state.stepperArray.map((step) => step.classList.remove(this.stateClasses.isSuccess))
     this.render()
   }
 
   bindEvents() {
     this.appFormElement.addEventListener('submit', this.onConfirm)
+    this.appStepperElement.addEventListener('click', this.onPrevStep)
   }
 }
 

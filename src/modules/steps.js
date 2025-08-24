@@ -25,13 +25,16 @@ export default [
     render: (state) => `
       ${CustomCheckbox({
         label:'Software Development',
+        isChecked: state?.topics?.includes('Software Development'),
       })}
       ${CustomCheckbox({
         label:'User Experience',
+        isChecked: state?.topics?.includes('User Experience'),
         }
       )}
       ${CustomCheckbox({
         label:'Graphic Design',
+        isChecked: state?.topics?.includes('Graphic Design'),
       })}
     `
   },

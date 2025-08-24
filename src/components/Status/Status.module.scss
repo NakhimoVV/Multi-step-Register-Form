@@ -9,7 +9,7 @@
   font-weight: 200;
 }
 
-.pins {
+.stepper {
   display: flex;
   column-gap: 11px;
 
@@ -23,9 +23,13 @@
     border: none;
     cursor: pointer;
 
+    &.isSuccess {
+      background-color: var(--color-step);
+    }
+
     &.isActive {
-      background-color: var(--color-pin);
-      box-shadow: 0 0 0 5px var(--color-shadow-pin);
+      background-color: var(--color-step);
+      box-shadow: 0 0 0 5px var(--color-shadow-step);
     }
   }
 }

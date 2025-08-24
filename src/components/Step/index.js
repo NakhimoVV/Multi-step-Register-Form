@@ -7,7 +7,8 @@ export default () => {
     <div class="${styles.step}">
       <form class="${styles.form}" data-js-app-form>
         <fieldset data-js-app-form-fieldset>
-          <legend class="${styles.title}" data-js-app-step-title></legend>
+          <legend class="${styles.title}" data-js-app-form-fieldset-title></legend>
+          <div class="${styles.dynamic}" data-js-app-form-fieldset-dynamic-content></div>
         </fieldset>
         <div class="${styles.footer}">
           ${Button()}

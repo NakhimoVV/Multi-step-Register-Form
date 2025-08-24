@@ -86,5 +86,9 @@ fieldset {
   dd {
     font-weight: 600;
     margin-inline-start: 4px;
+
+    & ul {
+      padding-inline-start: 22px;
+    }
   }
 }

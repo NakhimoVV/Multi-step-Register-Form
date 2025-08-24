@@ -1,17 +1,15 @@
 import steps from "@/modules/steps.js";
-import Step from "@/components/Step/index.js";
-import Status from "@/components/Status/index.js";
 
 class App {
   selectors= {
     root: '[data-js-app]',
     appForm: '[data-js-app-form]',
     formFieldset: '[data-js-app-form-fieldset]',
-    stepTitle: '[data-js-app-step-title]',
+    stepTitle: '[data-js-app-form-fieldset-title]',
+    dynamicContent: '[data-js-app-form-fieldset-dynamic-content]',
     fieldNameInput: '[data-js-app-field-name-input]',
     fieldEmailInput: '[data-js-app-field-email-input]',
-    continueButton: '[data-js-app-continue-button]',
-    confirmButton: '[data-js-app-confirm-button]',
+    formButton: '[data-js-app-form-button]',
     numberStep: '[data-js-app-number-step]',
   }
 
@@ -22,14 +20,11 @@ class App {
     this.stepTitleElement = this.rootElement.querySelector(this.selectors.stepTitle);
     this.appFormElement = this.rootElement.querySelector(this.selectors.appForm);
     this.formFieldsetElement = this.appFormElement.querySelector(this.selectors.formFieldset);
-    this.continueButtonElement = this.rootElement.querySelector(this.selectors.continueButton);
-    this.confirmButtonElement = this.rootElement.querySelector(this.selectors.confirmButton);
+    this.dynamicContentElement = this.formFieldsetElement.querySelector(this.selectors.dynamicContent);
+    this.formButtonElement = this.rootElement.querySelector(this.selectors.formButton);
     this.numberStepElement = this.rootElement.querySelector(this.selectors.numberStep);
 
     this.state = {
-    //   name: "Emily",
-    //   email: "email",
-    //   topics: ["ds", 'dsd', 'sds']
       data: this.getDataFromLocalStorage(),
       currentStep: 0,
     }
@@ -60,15 +55,31 @@ class App {
     localStorage.removeItem(this.localStorageKey)
   }
 
+  findInputElement() {
+    this.fieldNameInputElement = this.appFormElement.querySelector(this.selectors.fieldNameInput);
+    this.fieldEmailInputElement = this.appFormElement.querySelector(this.selectors.fieldEmailInput);
+  }
+
   render() {
     const step = steps[this.state.currentStep]
     this.stepTitleElement.textContent = step.title
-    this.formFieldsetElement.insertAdjacentHTML('beforeend', step.render(this.state.data))
+    this.dynamicContentElement.innerHTML = step.render(this.state.data)
     this.numberStepElement.textContent = this.state.currentStep + 1
 
     if (this.state.currentStep === 0) {
-      this.fieldNameInputElement = this.appFormElement.querySelector(this.selectors.fieldNameInput);
-      this.fieldEmailInputElement = this.appFormElement.querySelector(this.selectors.fieldEmailInput);
+      this.findInputElement()
+    }
+
+    const lastStep = this.state.currentStep === steps.length - 1
+
+    if (lastStep) {
+      this.formButtonElement.type = 'submit'
+      this.formButtonElement.textContent = 'Confirm'
+      this.formButtonElement.onclick = null
+    } else {
+      this.formButtonElement.type = 'button'
+      this.formButtonElement.textContent = 'Continue'
+      this.formButtonElement.onclick = this.onNextStep
     }
   }
 
@@ -85,43 +96,54 @@ class App {
     if (Array.isArray(stepData) && stepData.length > 0) {
       this.state.data['topics'] = stepData;
       this.saveDataToLocalStorage()
-      // this.state.currentStep++
-      // рендер шага 3
+      this.state.currentStep++
+      this.render()
     }
   }
 
   onNextStep = (event) => {
-    if (this.appFormElement.checkValidity()) {
-      const isEmptyDataLocalStorage = Object.keys(this.state.data).length === 0
-      const newName = this.fieldNameInputElement.value;
-      const newEmail = this.fieldEmailInputElement.value;
-      const isCorrectValues = newName.trim().length > 0 && newEmail.trim().length > 0;
+    event.preventDefault()
+    event.stopPropagation()
 
-      if (isEmptyDataLocalStorage) {
-        if (isCorrectValues) {
-          this.nextStep({
-            'name': newName,
-            'email': newEmail
-          });
-        }
-      } else {
-        this.state.currentStep++
-      }
-    } else {
+    if (!this.appFormElement.checkValidity()) {
       this.appFormElement.reportValidity()
+      return
+    }
+
+    if (this.state.currentStep === 0) {
+      const newName = this.fieldNameInputElement.value.trim()
+      const newEmail = this.fieldEmailInputElement.value.trim()
+      const isCorrectValues = newName.length > 0 && newEmail.length > 0
+
+      if (isCorrectValues) {
+        this.nextStep({
+          'name': newName,
+          'email': newEmail
+        })
+      }
+    }
+
+    if (this.state.currentStep === 1) {
+      const checkedArray = [
+        ...this.appFormElement.querySelectorAll('input[type="checkbox"]:checked')
+      ].map(input => input.value)
+
+      if(checkedArray.length > 0) {
+        this.nextStep(checkedArray)
+      }
     }
   }
   onConfirm = (event) => {
     event.preventDefault();
     this.deleteDataFromLocalStorage()
+    this.state.data = {}
     alert("🎉 Success")
+    this.state.currentStep = 0
+    this.render()
   }
 
   bindEvents() {
-    this.continueButtonElement.addEventListener('click', this.onNextStep)
-
-    // Нужен слушатель на кнопки Pins (onPrevStep)
-    this.confirmButtonElement?.addEventListener('submit', this.onConfirm)
+    this.appFormElement.addEventListener('submit', this.onConfirm)
   }
 }
 

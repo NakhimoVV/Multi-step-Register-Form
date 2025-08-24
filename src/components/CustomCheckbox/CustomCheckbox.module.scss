@@ -17,6 +17,10 @@
   &:has(input:focus) {
     border-color: var(--color-light);
   }
+
+  &:has(input:user-invalid) {
+    border-color: red;
+  }
 }
 
 .label {

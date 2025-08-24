@@ -65,12 +65,26 @@ fieldset {
   }
 
   dl {
+    display: grid;
+    row-gap: 8px;
     font-size: 16px;
+    margin: 0;
+
+    & div {
+      display: flex;
+
+      &:last-child {
+        margin-top: 8px;
+        flex-direction: column;
+      }
+    }
+
   }
   dt {
     color: var(--color-silver);
   }
   dd {
     font-weight: 600;
+    margin-inline-start: 4px;
   }
 }

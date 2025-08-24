@@ -7,7 +7,8 @@ export default (props) => {
     id = getIdFromLabel(label),
     placeholder,
     type= "text",
-    dataJsAttribute = ''
+    dataJsAttribute = '',
+    value = ''
   } = props
 
   return `
@@ -19,6 +20,8 @@ export default (props) => {
           id="${id}"
           placeholder="${placeholder}"
           autocomplete="true"
+          value="${value}"
+          required
           ${dataJsAttribute}
         />      
       </div>

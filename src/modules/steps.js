@@ -8,16 +8,16 @@ export default [
       ${Field({
         label:'Name',
         placeholder:'Enter your name',
-        dataJsAttribute: 'data-js-app-field-name-input'
-        })
-      }
+        dataJsAttribute: 'data-js-app-field-name-input',
+        value: state?.name,
+      })}
       ${Field({
         label:'Email',
         placeholder:'Example@gmail.com',
         type:'email',
-        dataJsAttribute: 'data-js-app-field-email-input'
-        }
-      )}
+        dataJsAttribute: 'data-js-app-field-email-input',
+        value: state?.email
+      })}
     `
   },
   {
@@ -25,34 +25,37 @@ export default [
     render: (state) => `
       ${CustomCheckbox({
         label:'Software Development',
-        })
-      }
+      })}
       ${CustomCheckbox({
         label:'User Experience',
         }
       )}
       ${CustomCheckbox({
         label:'Graphic Design',
-        }
-      )}
+      })}
     `
   },
   {
     title: 'Summary',
     render: (state) => `
       <dl>
-        <dt>Name:</dt>
-        <dd>Emily Johnson</dd>
-        <dt>Email:</dt>
-        <dd>emily@emilyjohnsonstl.com</dd>
-        <dt>Topics:</dt>
-        <dd>
-          <ul>
-            <li>User Experience</li>
-            <li>Graphic Design</li>
-          </ul>
-        </dd>
+        <div>
+          <dt>Name:</dt>
+          <dd>${state.name}</dd>
+        </div>
+        <div>
+          <dt>Email:</dt>
+          <dd>${state.email}</dd>
+        </div>
+        <div>
+          <dt>Topics:</dt>
+          <dd>
+            <ul>
+              ${state.topics?.map(item => (`<li>${item}</li>`)).join('')}
+            </ul>
+          </dd>
+        </div>
       </dl>
     `
   }
-]
+];

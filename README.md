@@ -20,5 +20,5 @@
 
 ## Author
 
-- Website [nakhimovv.github.io//](https://nakhimovv.github.io//)
+- Website [Multi-step-Register-Form](https://nakhimovv.github.io/Multi-step-Register-Form)
 - GitHub [NakhimoVV](https://github.com/NakhimoVV)

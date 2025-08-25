@@ -5,7 +5,6 @@
 
   position: relative;
   z-index: var(--layout-block);
-
   display: flex;
   flex-direction: column;
   padding: 40px;
@@ -15,9 +14,10 @@
     linear-gradient($bgColor, $bgColor) padding-box,
     linear-gradient(
         120deg,
-        rgba(229, 231, 235, 0.5) 0.05%,
-        rgba(229, 231, 235, 0) 25.05%
-    ) border-box;
+        rgb(229 231 235 / 50%) 0.05%,
+        rgb(229 231 235 / 0%) 25.05%
+      )
+      border-box;
 
   @include mobile {
     padding: 24px;

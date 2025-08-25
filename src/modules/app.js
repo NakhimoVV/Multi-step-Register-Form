@@ -1,8 +1,8 @@
-import steps from "@/modules/steps.js";
+import steps from '@/modules/steps.js'
 import { isActive, isSuccess } from '@/components/Status/Status.module.scss'
 
 class App {
-  selectors= {
+  selectors = {
     root: '[data-js-app]',
     appForm: '[data-js-app-form]',
     formFieldset: '[data-js-app-form-fieldset]',
@@ -17,20 +17,32 @@ class App {
 
   stateClasses = {
     isActive,
-    isSuccess
+    isSuccess,
   }
 
   localStorageKey = 'app-form'
 
   constructor() {
-    this.rootElement = document.querySelector(this.selectors.root);
-    this.stepTitleElement = this.rootElement.querySelector(this.selectors.stepTitle);
-    this.appFormElement = this.rootElement.querySelector(this.selectors.appForm);
-    this.formFieldsetElement = this.appFormElement.querySelector(this.selectors.formFieldset);
-    this.dynamicContentElement = this.formFieldsetElement.querySelector(this.selectors.dynamicContent);
-    this.formButtonElement = this.rootElement.querySelector(this.selectors.formButton);
-    this.numberStepElement = this.rootElement.querySelector(this.selectors.numberStep);
-    this.appStepperElement = this.rootElement.querySelector(this.selectors.appStepper);
+    this.rootElement = document.querySelector(this.selectors.root)
+    this.stepTitleElement = this.rootElement.querySelector(
+      this.selectors.stepTitle,
+    )
+    this.appFormElement = this.rootElement.querySelector(this.selectors.appForm)
+    this.formFieldsetElement = this.appFormElement.querySelector(
+      this.selectors.formFieldset,
+    )
+    this.dynamicContentElement = this.formFieldsetElement.querySelector(
+      this.selectors.dynamicContent,
+    )
+    this.formButtonElement = this.rootElement.querySelector(
+      this.selectors.formButton,
+    )
+    this.numberStepElement = this.rootElement.querySelector(
+      this.selectors.numberStep,
+    )
+    this.appStepperElement = this.rootElement.querySelector(
+      this.selectors.appStepper,
+    )
 
     this.state = {
       data: this.getDataFromLocalStorage(),
@@ -49,12 +61,12 @@ class App {
     if (!data) {
       return {}
     }
-    
+
     try {
       const parsedData = JSON.parse(data)
       return typeof parsedData === 'object' ? parsedData : {}
     } catch {
-      console.error("Data form parse error!")
+      console.error('Data form parse error!')
       return {}
     }
   }
@@ -66,15 +78,19 @@ class App {
   }
 
   findInputElement() {
-    this.fieldNameInputElement = this.appFormElement.querySelector(this.selectors.fieldNameInput);
-    this.fieldEmailInputElement = this.appFormElement.querySelector(this.selectors.fieldEmailInput);
+    this.fieldNameInputElement = this.appFormElement.querySelector(
+      this.selectors.fieldNameInput,
+    )
+    this.fieldEmailInputElement = this.appFormElement.querySelector(
+      this.selectors.fieldEmailInput,
+    )
   }
 
   render() {
     const step = steps[this.state.currentStep]
     this.stepTitleElement.textContent = step.title
 
-    this.state.stepperArray.map((step, index, array) => {
+    this.state.stepperArray.map((step, index) => {
       if (index === this.state.currentStep) {
         step.classList.add(this.stateClasses.isActive)
       } else {
@@ -103,20 +119,25 @@ class App {
   }
 
   nextStep(stepData) {
-    const isFirstStepData = stepData.hasOwnProperty("name") && stepData.hasOwnProperty("email");
+    const isFirstStepData =
+      Object.hasOwn(stepData, 'name') && Object.hasOwn(stepData, 'email')
 
     if (isFirstStepData) {
-      this.state.data = {...stepData}
+      this.state.data = { ...stepData }
       this.saveDataToLocalStorage()
-      this.state.stepperArray[this.state.currentStep].classList.add(this.stateClasses.isSuccess)
+      this.state.stepperArray[this.state.currentStep].classList.add(
+        this.stateClasses.isSuccess,
+      )
       this.state.currentStep++
       this.render()
     }
 
     if (Array.isArray(stepData) && stepData.length > 0) {
-      this.state.data['topics'] = stepData;
+      this.state.data['topics'] = stepData
       this.saveDataToLocalStorage()
-      this.state.stepperArray[this.state.currentStep].classList.add(this.stateClasses.isSuccess)
+      this.state.stepperArray[this.state.currentStep].classList.add(
+        this.stateClasses.isSuccess,
+      )
       this.state.currentStep++
       this.render()
     }
@@ -124,8 +145,12 @@ class App {
 
   prevStep(target) {
     if (this.state.currentStep > 0) {
-      this.state.stepperArray[this.state.currentStep].classList.remove(this.stateClasses.isActive)
-      this.state.stepperArray[this.state.currentStep - 1].classList.remove(this.stateClasses.isSuccess)
+      this.state.stepperArray[this.state.currentStep].classList.remove(
+        this.stateClasses.isActive,
+      )
+      this.state.stepperArray[this.state.currentStep - 1].classList.remove(
+        this.stateClasses.isSuccess,
+      )
       this.state.currentStep--
       target.classList.add(this.stateClasses.isActive)
       this.render()
@@ -148,18 +173,20 @@ class App {
 
       if (isCorrectValues) {
         this.nextStep({
-          'name': newName,
-          'email': newEmail
+          name: newName,
+          email: newEmail,
         })
       }
     }
 
     if (this.state.currentStep === 1) {
       const checkedArray = [
-        ...this.appFormElement.querySelectorAll('input[type="checkbox"]:checked')
-      ].map(input => input.value)
+        ...this.appFormElement.querySelectorAll(
+          'input[type="checkbox"]:checked',
+        ),
+      ].map((input) => input.value)
 
-      if(checkedArray.length > 0) {
+      if (checkedArray.length > 0) {
         this.nextStep(checkedArray)
       }
     }
@@ -169,18 +196,20 @@ class App {
     event.preventDefault()
     event.stopPropagation()
 
-    const target = event.target;
+    const target = event.target
 
     this.prevStep(target)
   }
 
   onConfirm = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     this.deleteDataFromLocalStorage()
     this.state.data = {}
-    alert("🎉 Success")
+    alert('🎉 Success')
     this.state.currentStep = 0
-    this.state.stepperArray.map((step) => step.classList.remove(this.stateClasses.isSuccess))
+    this.state.stepperArray.map((step) =>
+      step.classList.remove(this.stateClasses.isSuccess),
+    )
     this.render()
   }
 

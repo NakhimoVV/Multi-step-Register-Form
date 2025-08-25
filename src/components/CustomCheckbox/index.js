@@ -1,12 +1,9 @@
-import styles from './CustomCheckbox.module.scss';
+import styles from './CustomCheckbox.module.scss'
 
 export default (props) => {
-  const {
-    label,
-    isChecked = false,
-  } = props
+  const { label, isChecked = false } = props
 
-  return (`
+  return `
     <label class="${styles.field}">
       <input
         class="visually-hidden"
@@ -19,5 +16,5 @@ export default (props) => {
         ${label}
       </span>
     </label>
-  `)
+  `
 }

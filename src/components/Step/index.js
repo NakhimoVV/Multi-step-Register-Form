@@ -1,9 +1,8 @@
 import styles from './Step.module.scss'
-import Button from "@/components/Button/index.js";
+import Button from '@/components/Button/index.js'
 
 export default () => {
-
-  return (`
+  return `
     <div class="${styles.step}">
       <form class="${styles.form}" data-js-app-form>
         <fieldset data-js-app-form-fieldset>
@@ -15,5 +14,5 @@ export default () => {
         </div>
       </form>
     </div>
-  `)
+  `
 }

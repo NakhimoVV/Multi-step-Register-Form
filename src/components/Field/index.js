@@ -1,14 +1,14 @@
-import styles from "./Field.module.scss";
-import getIdFromLabel from "@/modules/getIdFromLabel.js";
+import styles from './Field.module.scss'
+import getIdFromLabel from '@/modules/getIdFromLabel.js'
 
 export default (props) => {
   const {
     label,
     id = getIdFromLabel(label),
     placeholder,
-    type= "text",
+    type = 'text',
     dataJsAttribute = '',
-    value = ''
+    value = '',
   } = props
 
   return `

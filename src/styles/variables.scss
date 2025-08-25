@@ -2,25 +2,24 @@
   --color-black: #121826;
   --color-grey-30: #212936;
   --color-grey-20: #394150;
-  --color-grey-10: #4D5562;
-  --color-silver: #A1A1A9;
-  --color-light: #E5E7EB;
-  --color-accent: #845EEE;
+  --color-grey-10: #4d5562;
+  --color-silver: #a1a1a9;
+  --color-light: #e5e7eb;
+  --color-accent: #845eee;
   --color-accent-light: #652cd1;
-  --color-step: #5425AF;
-  --color-shadow-step: #845EEE4D;
-
+  --color-step: #5425af;
+  --color-shadow-step: #845eee4d;
   --border: 1px solid var(--color-grey-10);
-  --button-gradient: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
-
+  --button-gradient: linear-gradient(
+    180deg,
+    var(--color-accent) 0%,
+    var(--color-accent-light) 100%
+  );
   --border-radius-l: 38px;
   --border-radius-m: 12px;
-
   --font-family-base: 'Inter', sans-serif;
   --width-block: 502px;
-
   --layout-block: 100;
   --layout-blure-circle: 10;
-
   --transition-duration: 0.2s;
 }
